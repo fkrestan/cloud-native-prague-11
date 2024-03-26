@@ -2,11 +2,16 @@ local tanka = import "tanka-util/main.libsonnet";
 local k = import 'k.libsonnet';
 
 local helm = tanka.helm.new(std.thisFile);
+local ns = k.core.v1.namespace;
 local pdb = k.policy.v1.podDisruptionBudget;
 
+local namespace = 'fidget-spinner-helm';
+
 {
+  namespace: ns.new(namespace),
+
   fidgetspinnerhelm: helm.template("fidget-spinner-helm", "../../../charts/fidget-spinner/", {
-    namespace: "fidget-spinner-helm",
+    namespace: namespace,
     values: {
       replicas: 5,
       memory: "200Mi"
