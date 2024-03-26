@@ -1,0 +1,229 @@
+#+title: Tanka: for those who hate string templating, but don't mind braces all that much
+#+STARTUP: overview
+
+* Not a trick question
+
+#+begin_src json
+
+{
+   "bar": 5,
+   "baz": false,
+   "dict": {
+      "nested": "hello world!"
+   },
+   "foo": "bar",
+   "list": [1, 2, 3]
+}
+#+end_src
+
+* Not a trick question
+
+#+begin_src json
+$ cat file.json
+{
+   "bar": 5,
+   "baz": false,
+   "dict": {
+      "nested": "hello world!"
+   },
+   "foo": "bar",
+   "list": [1, 2, 3]
+}
+#+end_src
+
+* A trick question
+
+#+begin_src json
+
+{
+   "bar": 5,
+   "baz": false,
+   "dict": {
+      "nested": "hello world!"
+   },
+   "foo": "bar",
+   "list": [1, 2, 3]
+}
+#+end_src
+
+* A trick question
+
+#+begin_src json
+$ cat file.yaml
+{
+   "bar": 5,
+   "baz": false,
+   "dict": {
+      "nested": "hello world!"
+   },
+   "foo": "bar",
+   "list": [1, 2, 3]
+}
+#+end_src
+
+* WAT
+#+ATTR_ORG: :width 1200
+[[file:wat.jpg]]
+
+* ...
+
+https://yaml.org/spec/1.2-old/spec.html#id2759572
+
+* Another trick question
+
+#+begin_src json
+
+{
+   "bar": 5,
+   "baz": false,
+   "dict": {
+      "nested": "hello world!"
+   },
+   "foo": "bar",
+   "list": [1, 2, 3]
+}
+#+end_src
+
+* Another trick question
+
+#+begin_src json
+$ cat file.jsonnet
+{
+   "bar": 5,
+   "baz": false,
+   "dict": {
+      "nested": "hello world!"
+   },
+   "foo": "bar",
+   "list": [1, 2, 3]
+}
+#+end_src
+
+* Me
+
+Filip Křesťan
+
+- Systems engineer
+- Currently working at Microsoft on internal runtime platform (read Kubernetes)
+
+* Agenda
+
+- Jsonnet
+- Tanka
+
+I expect that you know a bit about Kubernetes and Helm
+
+* Presentation resources
+#+ATTR_ORG: :width 900
+[[file:qr.png]]
+https://github.com/fkrestan/cloud-native-prague-11
+
+* Goals
+
+What you'll _not_ get out of this talk:
+- You'll not be a Jsonnet or Tanka guru
+
+What you'll get out of this talk:
+- Whether Jsonnet and Tanka has something to offer you
+- Links to good Jsonnet and Tanka learning resources
+- Hopefully a realization that your relationship with Helm shows signs of
+  Stockholm syndrome
+
+* What's wrong with Helm?
+
+- String templating for structured data
+  - ={{ ... | indent 8 }}=
+  - ={{ tpl ... }}=
+- A tool which is bad at producing valid yaml
+- Bad at handling ever increasing Kubernets complexity
+
+Kubernetes API objects are structured data
+
+* Emerging class of languages
+
+- specialized for (configuration) data generation
+- Examples:
+  - Jsonnet
+  - CUE
+  - Dhall
+  - Pkl
+
+* Jsonnet
+
+- https://jsonnet.org/
+- Purely functional(*)
+- lazy evaluated
+- structured data generation language.
+
+Lends itself exceptionally well to generating Kuberenetes API resource manifests
+
+* +3min+ 5min Jsonnet language overview
+
+Examples!
+
+- https://tanka.dev/jsonnet/overview
+
+* Jsonnet integration
+
+You can very easily:
+- Embed Jsonnet in your tool
+- Inject your "native functions" into Jsonnet evaluation context
+
+* Jsonnet learning resources
+
+- https://jsonnet.org/learning/tutorial.html
+- https://tanka.dev/jsonnet/overview
+- https://jsonnet.org/ref/language.html
+- https://github.com/prometheus-operator/kube-prometheus
+
+* Tanka
+
+- https://tanka.dev/
+- Grafana Labs OSS project
+- Wraps Jsonnet in a nice Kubernetes API resource generation and deployment tool
+  - Read Helm but with Jsonnet instead of Go =text/template= :)
+- Adds guide rails to the project structure
+- Terraform apply style diff! :)
+  - No plans :(
+  - Orphaned resources some extra management :(
+
+* Advanced examples
+
+- Introspection in mixins
+  - PDB for, HPA for
+- Helm and Kustomize integration
+  -  modifications of output
+- kube-prometheus powah!
+
+* What can Jsonnet do for you
+
+** A developer writing their own manifests for a single service
+  - Not all that much. I'd still argue that it's better than Helm.
+  - The `tk apply` diff is very nice for quick development loop
+
+** A Kubernetes Admin
+  - Uniformity - you can override and normalize labels used in all helm charts
+    without forking those.
+    - Please try to contribute improvements where you can.
+  - Tanka supports Helm Charts, Kustomize packages, plain yamls and anything
+    you're willing to write yourself.
+  - Kube-prometheus is awesome - we need more things like this.
+
+** A platform team
+  - You can easily generate hundreds of thousands of lines of k8s manifests from
+    a "platform manifest" and small json small library
+    - Have control over uniformity
+    - Embed best practices and sane defaults (aka a paved road / golden path)
+    - Case in point, Showmax did that.
+  - If you want your "platform manifest" to contain resources outside of
+    Kubernetes you can easily embed jsonned or tanka in your tooling.
+
+* Jsonnet pain points
+
+- Some expressions force lazy evaluation
+- Data/schema validation
+- Gives you too much freedom and flexibility
+- Modifying arrays is kind of slow and cumbersome
+- The syntax (but hey it's readable for anyone who've seen JSON)
+
+-> Pkl?
