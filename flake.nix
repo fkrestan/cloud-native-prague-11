@@ -16,6 +16,8 @@
           k3d
           yq
           kubectl
+          skopeo
+          kubernetes-helm
         ];
       };
     };
