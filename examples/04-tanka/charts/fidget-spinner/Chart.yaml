@@ -1,0 +1,8 @@
+---
+apiVersion: v2
+name: fidget-spinner
+description: A very bad Helm Chart example
+
+type: application
+version: 0.1.8
+...

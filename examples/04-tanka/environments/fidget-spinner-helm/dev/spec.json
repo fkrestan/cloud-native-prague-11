@@ -1,0 +1,18 @@
+{
+  "apiVersion": "tanka.dev/v1alpha1",
+  "kind": "Environment",
+  "metadata": {
+    "name": "environments/fidget-spinner-helm/dev"
+  },
+  "spec": {
+    "contextNames": ["k3d-minime"],
+    "namespace": "fidget-spinner-helm",
+    "resourceDefaults": {
+      "annotations": {
+        "owner-contact": "filip.krestan@example.com"
+      }
+    },
+    "applyStrategy": "server",
+    "injectLabels": true
+  }
+}
