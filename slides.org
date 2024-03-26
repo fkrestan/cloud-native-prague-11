@@ -106,6 +106,8 @@ Filip Křesťan
 - Systems engineer
 - Currently working at Microsoft on internal runtime platform (read Kubernetes)
 
+
+> Disclaimer
 * Agenda
 
 - Jsonnet
@@ -150,14 +152,15 @@ Kubernetes API objects are structured data
 
 * Jsonnet
 
-- https://jsonnet.org/
+https://jsonnet.org/
+
 - Purely functional(*)
 - lazy evaluated
 - structured data generation language.
 
 Lends itself exceptionally well to generating Kuberenetes API resource manifests
 
-* +3min+ 5min Jsonnet language overview
+* +3min+ 5min-ish Jsonnet language overview
 
 Examples!
 
@@ -178,7 +181,8 @@ You can very easily:
 
 * Tanka
 
-- https://tanka.dev/
+https://tanka.dev/
+
 - Grafana Labs OSS project
 - Wraps Jsonnet in a nice Kubernetes API resource generation and deployment tool
   - Read Helm but with Jsonnet instead of Go =text/template= :)
@@ -189,33 +193,32 @@ You can very easily:
 
 * Advanced examples
 
-- Introspection in mixins
-  - PDB for, HPA for
+- Introspection and "mixins"
+  - PDB, HPA, Service, ServiceMonitor
 - Helm and Kustomize integration
   -  modifications of output
+- [[https://github.com/prometheus-operator/kube-prometheus/tree/main/jsonnet/kube-prometheus/addons][kube-prometheus addons]]
 
 * What can Jsonnet do for you
 
 ** A developer writing their own manifests for a single service
   - Not all that much. I'd still argue that it's better than Helm.
-  - The `tk apply` diff is very nice for quick development loop
+  - The =tk apply= diff is very nice for quick development loop
 
 ** A Kubernetes Admin
-  - Uniformity - you can override and normalize labels used in all helm charts
-    without forking those.
+  - Uniformity - you can override and normalize labels used in all helm charts without forking those.
     - Please try to contribute improvements where you can.
-  - Tanka supports Helm Charts, Kustomize packages, plain yamls and anything
-    you're willing to write yourself.
+  - Tanka supports Helm Charts, Kustomize packages, plain yamls and anything you're willing to write yourself.
+    - You don't need to make your own forks of charts
   - Kube-prometheus is awesome - we need more things like this.
 
 ** A platform team
-  - You can easily generate hundreds of thousands of lines of k8s manifests from
-    a "platform manifest" and small json small library
-    - Have control over uniformity
-    - Embed best practices and sane defaults (aka a paved road / golden path)
-    - Case in point, Showmax did that.
-  - If you want your "platform manifest" to contain resources outside of
-    Kubernetes you can easily embed jsonned or tanka in your tooling.
+  - You can easily generate hundreds of thousands of lines of k8s manifests from a "platform manifest" and small json small library
+    - Uniformity
+    - Embed best practices and sane defaults (a.k.a a paved road/golden path)
+  - If you want your "platform manifest" to contain resources outside of Kubernetes you can easily embed Jsonnet or Tanka in your tooling.
+    - I've generated Terraform "glue code" using Jsonnet
+    - Single source of truth for service configuraition
 
 * Jsonnet pain points
 
