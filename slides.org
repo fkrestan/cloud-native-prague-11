@@ -193,7 +193,6 @@ You can very easily:
   - PDB for, HPA for
 - Helm and Kustomize integration
   -  modifications of output
-- kube-prometheus powah!
 
 * What can Jsonnet do for you
 
