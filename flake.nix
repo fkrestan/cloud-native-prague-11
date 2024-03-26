@@ -14,6 +14,7 @@
           jsonnet
           k3d
           yq
+          kubectl
         ];
       };
     };
