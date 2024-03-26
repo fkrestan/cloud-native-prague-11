@@ -12,6 +12,7 @@
         buildInputs = with pkgs; [
           tanka
           jsonnet
+          jsonnet-bundler
           k3d
           yq
           kubectl
