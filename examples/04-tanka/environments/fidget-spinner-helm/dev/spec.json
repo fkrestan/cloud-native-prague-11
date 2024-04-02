@@ -5,7 +5,7 @@
     "name": "environments/fidget-spinner-helm/dev"
   },
   "spec": {
-    "contextNames": ["k3d-minime"],
+    "contextNames": ["cloud-native-prague-11"],
     "namespace": "fidget-spinner-helm",
     "resourceDefaults": {
       "annotations": {

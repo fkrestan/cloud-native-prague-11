@@ -16,6 +16,7 @@
           jsonnet-bundler
           k3d
           kubectl
+          kubernetes-helm
           skopeo
           tanka
         ];
