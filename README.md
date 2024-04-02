@@ -3,6 +3,20 @@
 This repository contains all resources for my talk at [Cloud Native Prague
 meetup #11][cnp11].
 
+The recording from the talk is available on [Cloud Native Prague YouTube
+channel][cnp-yt].
+
+# Talk Abstract
+
+Kubernetes API resource manifests are structured data. String templating is
+admittedly not the best way to generate those. There now exists a whole class of
+purpose built languages specifically designed to generate and validate
+structured data that lend themselves well to generating Kubernetes API
+resources. Depending on what your use-case is, this might be a killer
+application for you.
+
+Jsonnet, used by Grafana Tanka, is one such language.
+
 
 # Slides
 
@@ -13,11 +27,11 @@ processor if you don't have text editor with Org mode at hand.
 
 # Examples
  
-There are also targets for building the `02-jsonnet-embed/`
-`03-jsonenet-native-functions/` and Go examples:
+The `examples` directory contains runnable samples of Jsonnet, Go and Tanka used
+during my presentation.
 
-```shell
-```
+The `Makefile` included in this repository provides targets for running the
+examples e.g. `make examples/01-jsonnet-basics/01.jsonnet`.
 
 
 # Playground 
@@ -45,6 +59,7 @@ make k3d-clean
 ```
 
 
+[cnp-yt]: https://www.youtube.com/@CloudNativePrague/videos
 [cnp11]: https://community.cncf.io/events/details/cncf-cloud-native-prague-presents-cloud-native-prague-11/
 [k3d]: https://k3d.io/
 [nix-direnv]: https://nix.dev/guides/recipes/direnv.html
