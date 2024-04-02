@@ -10,14 +10,14 @@
     in {
       devShell.x86_64-linux = pkgs.mkShell {
         buildInputs = with pkgs; [
-          tanka
+          gnumake
+          go
           jsonnet
           jsonnet-bundler
           k3d
-          yq
           kubectl
           skopeo
-          kubernetes-helm
+          tanka
         ];
       };
     };

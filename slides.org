@@ -63,7 +63,7 @@ $ cat file.yaml
 
 * WAT
 #+ATTR_ORG: :width 1200
-[[file:wat.jpg]]
+[[file:res/wat.jpg]]
 
 * ...
 
@@ -117,7 +117,7 @@ I expect that you know a bit about Kubernetes and Helm
 
 * Presentation resources
 #+ATTR_ORG: :width 900
-[[file:qr.png]]
+[[file:res/qr.png]]
 https://github.com/fkrestan/cloud-native-prague-11
 
 * Goals
